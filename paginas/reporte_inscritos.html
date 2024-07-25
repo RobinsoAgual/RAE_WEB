@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte de Inscritos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Reporte de Inscritos</h1>
+        <div class="mt-4">
+            <h2>Seleccionar Curso</h2>
+            <table class="table" id="coursesTable">
+                <thead>
+                    <tr>
+                        <th>ID del Curso</th>
+                        <th>Nombre del Curso</th>
+                        <th>Descripción</th>
+                        <th>Seleccionar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se llenarán los cursos dinámicamente -->
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-4" id="reporte">
+            <!-- Aquí se mostrará el reporte -->
+        </div>
+    </div>
+    <button type="button" class="btn btn-secondary btn-block mt-3" onclick="window.location.href='menu.html'">Volver al Menú</button>
+    <script>
+        // Fetch de los cursos al cargar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('http://localhost:3000/courses')
+                .then(response => response.json())
+                .then(courses => {
+                    const tableBody = document.querySelector('#coursesTable tbody');
+                    courses.forEach(course => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${course.id}</td>
+                            <td>${course.name}</td>
+                            <td>${course.description}</td>
+                            <td><button class="btn btn-primary select-course" data-id="${course.id}">Seleccionar</button></td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+
+                    // Agregar eventos a los botones de seleccionar curso
+                    document.querySelectorAll('.select-course').forEach(button => {
+                        button.addEventListener('click', function() {
+                            const courseId = this.getAttribute('data-id');
+                            generateReport(courseId);
+                        });
+                    });
+                })
+                .catch(error => console.error('Error al obtener los cursos:', error));
+        });
+
+        function generateReport(courseId) {
+            fetch(`http://localhost:3000/report?courseId=${courseId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const reporteDiv = document.getElementById('reporte');
+                    reporteDiv.innerHTML = '<h2>Reporte de Inscritos</h2>';
+                    if (data.length === 0) {
+                        reporteDiv.innerHTML += '<p>No hay inscritos en este curso.</p>';
+                    } else {
+                        const table = document.createElement('table');
+                        table.className = 'table';
+                        table.innerHTML = `
+                            <thead>
+                                <tr>
+                                    <th>ID del Usuario</th>
+                                    <th>Nombre del Usuario</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${data.map(user => `
+                                    <tr>
+                                        <td>${user.id}</td>
+                                        <td>${user.name}</td>
+                                    </tr>
+                                `).join('')}
+                            </tbody>
+                        `;
+                        reporteDiv.appendChild(table);
+                    }
+                })
+                .catch(error => console.error('Error al obtener el reporte:', error));
+        }
+    </script>
+</body>
+</html>

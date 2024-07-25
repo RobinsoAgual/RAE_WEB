@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sugerencias - RAE.ec</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Enlace a tu archivo CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-group textarea {
+            resize: vertical;
+            height: 150px;
+        }
+        .form-group button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        .back-button {
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            font-size: 16px;
+            text-decoration: none;
+            color: #007BFF;
+        }
+        .back-button:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Envíanos tus Sugerencias</h1>
+        <form id="sugerenciasForm">
+            <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Correo Electrónico:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="sugerencia">Sugerencia:</label>
+                <textarea id="sugerencia" name="sugerencia" required></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit">Enviar Sugerencia</button>
+            </div>
+            <a href="../index.html" class="back-button">Volver al Inicio</a>
+        </form>
+    </div>
+    <script>
+        document.getElementById('sugerenciasForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('nombre').value;
+            const email = document.getElementById('email').value;
+            const sugerencia = document.getElementById('sugerencia').value;
+            
+            // Aquí puedes agregar código para enviar la sugerencia a tu servidor
+            // Por ejemplo, usando fetch para enviar los datos a un endpoint API
+            
+            // Ejemplo de código para enviar los datos (este código necesita un endpoint válido)
+            // fetch('https://tu-servidor.com/api/sugerencias', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ nombre, email, sugerencia })
+            // })
+            // .then(response => response.json())
+            // .then(data => {
+            //     alert('Gracias por tu sugerencia, ' + nombre + '!');
+            //     window.location.href = '../index.html'; // Redirige al inicio
+            // })
+            // .catch(error => console.error('Error:', error));
+
+            alert('Gracias por tu sugerencia, ' + nombre + '!');
+            window.location.href = '../index.html'; // Redirige al inicio
+        });
+    </script>
+</body>
+</html>

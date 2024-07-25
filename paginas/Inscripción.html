@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscripción en un Curso - RAE.ec</title>
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 30px;
+        }
+        .table {
+            margin-top: 20px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">RAE.ec</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#Inicio">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#services">Servicios</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contacto</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="cerrarseccion.html">Cerrar Sección</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Inscripción en un Curso -->
+    <div class="container">
+        <h2 class="text-center">Bienvenido, <span id="userName"></span></h2>
+        <h3 class="text-center">Inscripción en un Curso</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Seleccionar</th>
+                    <th>Curso</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody id="coursesTableBody">
+                <!-- Las filas de los cursos se llenarán dinámicamente aquí -->
+            </tbody>
+        </table>
+        <button id="confirmButton" class="btn btn-primary">Confirmar Inscripción</button>
+    </div>
+
+    <!-- Mostrar los cursos inscritos -->
+    <div class="container">
+        <h3 class="text-center">Cursos Inscritos</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Curso</th>
+                    <th>Descripción</th>
+                </tr>
+            </thead>
+            <tbody id="enrolledCoursesTableBody">
+                <!-- Las filas de los cursos inscritos se llenarán dinámicamente aquí -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Enlace a jQuery y Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const userName = localStorage.getItem('userName');
+            document.getElementById('userName').textContent = userName ? userName : 'Invitado';
+
+            // Cargar los cursos disponibles
+            fetch('http://localhost:3000/courses')
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Cursos disponibles:', data); // Mensaje de depuración
+                    const tableBody = document.getElementById('coursesTableBody');
+                    data.forEach(curso => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td><input type="checkbox" name="course" value="${curso.id}"></td>
+                            <td>${curso.name}</td>
+                            <td>${curso.description}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error al cargar los cursos:', error));
+
+            // Cargar los cursos inscritos
+            if (userName) {
+                fetch(`http://localhost:3000/my-courses?userName=${encodeURIComponent(userName)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Cursos inscritos:', data); // Mensaje de depuración
+                        const tableBody = document.getElementById('enrolledCoursesTableBody');
+                        data.forEach(curso => {
+                            const row = document.createElement('tr');
+                            row.innerHTML = `
+                                <td>${curso.name}</td>
+                                <td>${curso.description}</td>
+                            `;
+                            tableBody.appendChild(row);
+                        });
+                    })
+                    .catch(error => console.error('Error al cargar los cursos inscritos:', error));
+            }
+
+            // Manejar el clic en el botón de confirmación
+            document.getElementById('confirmButton').addEventListener('click', function() {
+                const selectedCourses = Array.from(document.querySelectorAll('input[name="course"]:checked'))
+                    .map(input => input.value);
+
+                if (selectedCourses.length > 0) {
+                    fetch('http://localhost:3000/enroll', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ userName, courseIds: selectedCourses })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Inscripción confirmada.');
+                            // Recargar los cursos inscritos
+                            fetch(`http://localhost:3000/my-courses?userName=${encodeURIComponent(userName)}`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    const tableBody = document.getElementById('enrolledCoursesTableBody');
+                                    tableBody.innerHTML = ''; // Limpiar tabla antes de volver a llenarla
+                                    data.forEach(curso => {
+                                        const row = document.createElement('tr');
+                                        row.innerHTML = `
+                                            <td>${curso.name}</td>
+                                            <td>${curso.description}</td>
+                                        `;
+                                        tableBody.appendChild(row);
+                                    });
+                                })
+                                .catch(error => console.error('Error al cargar los cursos inscritos:', error));
+                        } else {
+                            alert('Error al confirmar la inscripción.');
+                        }
+                    })
+                    .catch(error => console.error('Error al enviar la inscripción:', error));
+                } else {
+                    alert('Por favor, selecciona al menos un curso.');
+                }
+            });
+        });
+    </script>
+
+
+  <!-- Sección de Redes Sociales y Derechos Reservados -->
+  <footer class="text-center mt-4 mb-4 bg-dark text-light py-3">
+    <div class="container">
+        <p>Síguenos en:</p>
+        <a href="https://www.facebook.com/profile.php?id=61561250949515" target="_blank" class="btn btn-outline-light btn-sm">
+            <i class="fab fa-facebook-f"></i> Facebook
+        </a>
+        <a href="https://www.instagram.com/tuPagina" target="_blank" class="btn btn-outline-light btn-sm">
+            <i class="fab fa-instagram"></i> Instagram
+        </a>
+        <a href="https://twitter.com/tuPagina" target="_blank" class="btn btn-outline-light btn-sm">
+            <i class="fab fa-twitter"></i> Twitter
+        </a>
+    </div>
+    <div class="container mt-3">
+        <p>&copy; 2024 Derechos reservados a RAE.ec</p>
+    </div>
+</footer>
+</body>
+</html>

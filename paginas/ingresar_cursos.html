@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingresar Cursos - RAE.ec</title>
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        .alert {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Ingresar Nuevo Curso</h2>
+        <div class="alert alert-danger" id="errorAlert" role="alert">
+            Error al ingresar el curso. Verifica los datos e intenta de nuevo.
+        </div>
+        <form id="courseForm">
+            <div class="form-group">
+                <label for="name">Nombre del Curso</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Ingrese el nombre del curso" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Descripción</label>
+                <textarea class="form-control" id="description" name="description" rows="4" placeholder="Ingrese una descripción del curso" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Guardar Curso</button>
+        </form>
+        <button type="button" class="btn btn-secondary btn-block mt-3" onclick="window.location.href='menu.html'">Volver al Menú</button>
+    </div>
+
+    <!-- Enlace a jQuery y Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('courseForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+            const data = {
+                name: formData.get('name'),
+                description: formData.get('description')
+            };
+
+            fetch('http://localhost:3000/addCourse', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Curso ingresado exitosamente.');
+                    document.getElementById('courseForm').reset();
+                } else {
+                    document.getElementById('errorAlert').style.display = 'block';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('errorAlert').style.display = 'block';
+            });
+        });
+    </script>
+
+     <!-- Sección de Redes Sociales y Derechos Reservados -->
+  <footer class="text-center mt-4 mb-4 bg-dark text-light py-3">
+    <div class="container">
+        <p>Síguenos en:</p>
+        <a href="https://www.facebook.com/profile.php?id=61561250949515" target="_blank" class="btn btn-outline-light btn-sm">
+            <i class="fab fa-facebook-f"></i> Facebook
+        </a>
+        <a href="https://www.instagram.com/tuPagina" target="_blank" class="btn btn-outline-light btn-sm">
+            <i class="fab fa-instagram"></i> Instagram
+        </a>
+        <a href="https://twitter.com/tuPagina" target="_blank" class="btn btn-outline-light btn-sm">
+            <i class="fab fa-twitter"></i> Twitter
+        </a>
+    </div>
+    <div class="container mt-3">
+        <p>&copy; 2024 Derechos reservados a RAE.ec</p>
+    </div>
+</footer>
+</body>
+</html>

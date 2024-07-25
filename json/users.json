@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "name": "Robinson",
+    "email": "ragual@est.ups.edu.ec",
+    "password": "admin"
+  },
+  {
+    "id": 2,
+    "name": "Lenin",
+    "email": "alenin@est.ups.edu.ec",
+    "password": "1234"
+  },
+  {
+    "id": 3,
+    "name": "Halfonso",
+    "email": "mroblesl@est.ups.edu.ec",
+    "password": "1234"
+  },
+  {
+    "id": 4,
+    "name": "Robinson",
+    "email": "rapshsquor@hotmail.com",
+    "password": "1234"
+  },
+  {
+    "id": 5,
+    "name": "NexTech Nexus",
+    "email": "ragual@est.ups.edu.ec",
+    "password": "12312312"
+  },
+  {
+    "id": 6,
+    "name": "Acestar",
+    "email": "ragual@est.ups.edu.ec",
+    "password": "12312321"
+  },
+  {
+    "id": 7,
+    "name": "Halfonso",
+    "email": "mroblesl@est.ups.edu.ec",
+    "password": "123123213"
+  },
+  {
+    "id": 14,
+    "name": "Nicole",
+    "email": "nicol@est.ups.edu.ec",
+    "password": "yupi"
+  },
+  {
+    "id": 8,
+    "name": "Halfonso",
+    "email": "ragual@est.ups.edu.ec",
+    "password": "1234"
+  },
+  {
+    "id": 9,
+    "name": "Clean Blue",
+    "email": "mroblesl@est.ups.edu.ec",
+    "password": "1234"
+  },
+  {
+    "id": 10,
+    "name": "Spiderman",
+    "email": "rapshsquor@hotmail.com",
+    "password": "1232132"
+  },
+  {
+    "id": 11,
+    "name": "Roy",
+    "email": "royalvear@est.ups.edu.ec",
+    "password": "hola"
+  },
+  {
+    "id": 12,
+    "name": "Antony",
+    "email": "ragual@est.ups.edu.ec",
+    "password": "1234"
+  },
+  {
+    "id": 13,
+    "name": "John",
+    "email": "john@example.com",
+    "password": "1234"
+  },
+  {
+    "id": 15,
+    "name": "Oswaldo",
+    "email": "owas@est.ups.edu.ec",
+    "password": "1234"
+  },
+  {
+    "id": 16,
+    "name": "Mario",
+    "email": "mario@est.ups.edu.ec",
+    "password": "1234"
+  },
+  {
+    "id": 17,
+    "name": "Arturo",
+    "email": "arturo@est.ups.edu.ec",
+    "password": "1234"
+  },
+  {
+    "id": 18,
+    "name": "Iron",
+    "email": "Iron@gmail.com",
+    "password": "1234"
+  }
+]

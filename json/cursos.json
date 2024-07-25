@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Curso de Inglés Básico",
+    "description": "Curso diseñado para principiantes que desean aprender inglés desde cero."
+  },
+  {
+    "id": 2,
+    "name": "Curso de Inglés Intermedio",
+    "description": "Curso para estudiantes con conocimientos básicos de inglés que desean mejorar sus habilidades."
+  },
+  {
+    "id": 3,
+    "name": "Curso de Inglés Avanzado",
+    "description": "Curso para estudiantes con un nivel avanzado de inglés que buscan perfeccionar su fluidez y comprensión."
+  },
+  {
+    "id": 4,
+    "name": "Curso de Programación Básica",
+    "description": "Curso introductorio a la programación, ideal para quienes desean aprender los fundamentos de la codificación."
+  },
+  {
+    "id": 5,
+    "name": "Curso de Fotografía Digital",
+    "description": "Curso para aprender las técnicas básicas y avanzadas de fotografía digital y edición de imágenes."
+  },
+  {
+    "id": 6,
+    "name": "Curso de Gestión de Proyectos",
+    "description": "Curso que cubre los principios de la gestión de proyectos, incluyendo planificación, ejecución y control de proyectos."
+  },
+  {
+    "id": 7,
+    "name": "Curso de Marketing Digital",
+    "description": "Un curso para aprender estrategias de marketing digital, incluyendo SEO, publicidad en redes sociales y análisis de datos."
+  },
+  {
+    "id": 8,
+    "name": "Curso de Creación de juegos Digital",
+    "description": "Un curso para aprender estrategias para diseñar juegos."
+  },
+  {
+    "id": 9,
+    "name": "Informatica",
+    "description": "Curso basico de manejo de microsoft "
+  },
+  {
+    "id": 10,
+    "name": "Agricultura",
+    "description": "Siembra tu vida"
+  },
+  {
+    "id": 11,
+    "name": "Street Workout",
+    "description": "Entrenamiento con tu propio peso corporal como calistenia"
+  },
+  {
+    "id": 12,
+    "name": "Agronomia casera ",
+    "description": "Este curso sirve para realizar cosas del campo"
+  }
+]

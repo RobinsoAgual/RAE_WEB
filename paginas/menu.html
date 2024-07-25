@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración - RAE.ec</title>
+    <!-- Enlace a Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 30px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">RAE.ec - Administración</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="ingresar_cursos.html">Ingresar Cursos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="reporte_inscritos.html">Reporte de Inscritos</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="cerrarseccion.html">Cerrar Sesión</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="container">
+        <h2 class="text-center">Panel de Administración</h2>
+        <p class="text-center mt-4" id="welcomeMessage">Bienvenido, <span id="adminName"></span></p>
+        <div class="text-center mt-4">
+            <a href="ingresar_cursos.html" class="btn btn-primary">Ir a Ingresar Cursos</a>
+            <a href="reporte_inscritos.html" class="btn btn-primary ml-2">Ir a Reporte de Inscritos</a>
+        </div>
+    </div>
+
+    <!-- Enlace a jQuery y Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Recupera el nombre del usuario desde el almacenamiento local
+        document.addEventListener('DOMContentLoaded', function() {
+            const userName = localStorage.getItem('userName');
+            if (userName) {
+                document.getElementById('adminName').textContent = userName;
+            } else {
+                document.getElementById('adminName').textContent = 'Administrador';
+            }
+        });
+    </script>
+
+     <!-- Sección de Redes Sociales y Derechos Reservados -->
+  <footer class="text-center mt-4 mb-4 bg-dark text-light py-3">
+    <div class="container">
+        <p>Síguenos en:</p>
+        <a href="https://www.facebook.com/profile.php?id=61561250949515" target="_blank" class="btn btn-outline-light btn-sm">
+            <i class="fab fa-facebook-f"></i> Facebook
+        </a>
+        <a href="https://www.instagram.com/tuPagina" target="_blank" class="btn btn-outline-light btn-sm">
+            <i class="fab fa-instagram"></i> Instagram
+        </a>
+        <a href="https://twitter.com/tuPagina" target="_blank" class="btn btn-outline-light btn-sm">
+            <i class="fab fa-twitter"></i> Twitter
+        </a>
+    </div>
+    <div class="container mt-3">
+        <p>&copy; 2024 Derechos reservados a RAE.ec</p>
+    </div>
+
+</footer>
+</body>
+</html>
